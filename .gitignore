@@ -1,3 +1,6 @@
 *.env
 db.sqlite3
 *.idea
+amiable-poet-423112-e5-532beb7e0adb.json
+__pycache__
+/.venv

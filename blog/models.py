@@ -1,8 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from sentiment import SentimentAnalyzer
 
 # Create your models here.
-
 
 class PostModel(models.Model):
     title = models.CharField(max_length=100)
@@ -22,11 +22,18 @@ class PostModel(models.Model):
     def __str__(self):
         return self.title
 
-
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(PostModel, on_delete=models.CASCADE)
     content = models.CharField(max_length=200)
+    score = models.IntegerField(default=0)  
 
+    def save(self, *args, **kwargs):
+        analyzer = SentimentAnalyzer()
+        sentiment_score = analyzer.analyze_sentiment(self.content)
+        self.score = sentiment_score
+        super().save(*args, **kwargs)
+     
+     
     def __str__(self):
         return self.content
