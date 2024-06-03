@@ -25,8 +25,8 @@ class PostModel(models.Model):
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(PostModel, on_delete=models.CASCADE)
-    content = models.CharField(max_length=200)
-    score = models.IntegerField(default=0)  
+    content = models.CharField(max_length=500)
+    score = models.FloatField(default=0)  
 
     def save(self, *args, **kwargs):
         analyzer = SentimentAnalyzer()

@@ -11,9 +11,4 @@ class SentimentAnalyzer:
         document = language_v1.Document(content=text, type=language_v1.Document.Type.PLAIN_TEXT)
         sentiment = self.client.analyze_sentiment(request={"document": document}).document_sentiment
         
-        if sentiment.score > 0.25:
-            return 1
-        elif sentiment.score < 0.25 and sentiment.score > -0.25:
-            return 0
-        else:
-            return -1
+        return sentiment.score
