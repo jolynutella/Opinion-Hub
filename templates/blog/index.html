@@ -10,22 +10,31 @@
                     <form method="POST">
                         {% csrf_token %}
                         {{ form|crispy }}
-                        <input class="btn btn-primary btn-block" type="submit" value="Create Project">
+                        <input class="btn btn-primary btn-block" type="submit" value="Create Discussion">
                     </form>
                 </div>
             </div>
         </div>
         <div class="col-md-8">
-            {% for post in posts %}
+            <!-- Display overall average score above the posts -->
+            <div class="card shadow my-3">
+                <div class="card-body">
+                    <h5>Overall Average Stakeholders Opinion: {{ overall_classification }} ({{ overall_average_score }})</h5>
+                </div>
+            </div>
+
+            <!-- Loop through and display individual posts -->
+            {% for item in post_data %}
             <div class="card shadow my-3">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-8">
-                            <small>{{ post.date_created }}</small>
+                            <small>{{ item.post.date_created }}</small>
+                            <p><small>Average Stakeholders Opinion: <strong>{{ item.score_classification }} ({{ item.average_score }})</strong></small></p>
                             <hr>
-                            <a class="h3" href="{% url 'blog-post-detail' post.id %}">{{ post.title }}</a>
+                            <a class="h3" href="{% url 'blog-post-detail' item.post.id %}">{{ item.post.title }}</a>
                             <p class="text-justify my-3">
-                                {{ post.content }}
+                                {{ item.post.content }}
                             </p>
                         </div>
                     </div>
@@ -36,3 +45,5 @@
     </div>
 </div>
 {% endblock %}
+
+

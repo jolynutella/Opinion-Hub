@@ -1,0 +1,12 @@
+crispy-bootstrap5==2024.10
+Django==5.1.2
+django-crispy-forms==2.3
+google==3.0.0
+google-api-core==2.21.0
+google-auth==2.35.0
+google-cloud==0.34.0
+google-cloud-language==2.14.0
+googleapis-common-protos==1.65.0
+openai==1.51.2
+pillow==10.4.0
+python-dotenv==1.0.1
